@@ -43,12 +43,6 @@ gamegrid = [
     ["dot", "turn", "dot", None],
 ]
 
-# turn has angles: 0 (upright), 1 (downright), 2 (downleft), and 3 (upleft)
-# straight has angles: 0 (updown), 1 (leftright)
-# t has angles: 0 (up), 1 (right), 2 (down), and 3 (left)
-# x has only one angle, 0
-# dot has angles: 0 (up), 1 (right), 2 (down), and 3 (left)
-
 solution = [
     [1, 2, 1, 2],
     [0, 1, 3, 0],
@@ -117,8 +111,10 @@ def make_dot(tag, init_data=None, color=None):
                     dpg.create_rotation_matrix(math.pi * init_data / 2.0, [0, 0, 1])
                     * dpg.create_translation_matrix([radius, 0]),
                 )
+                dot_radius = cw / 5.0
+                dpg.draw_circle((-radius, 0), dot_radius, thickness=3, color=color)
                 dpg.draw_line(
-                    (-radius, 0), (-radius, -radius), thickness=5, color=color
+                    (-radius, -dot_radius), (-radius, -radius), thickness=5, color=color
                 )
 
     dpg.set_item_callback(tag, lambda s, a, u: base_push(s, a, u, inner_tag, 4))
